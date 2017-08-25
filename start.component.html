@@ -1,0 +1,113 @@
+<div class="container">
+  <p>
+    Start Page!
+  </p>
+
+  <form [formGroup]="myForm" (ngSubmit)="save(myForm.value, myForm.valid)">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="appName">Application Name</label>
+          <input id="appName" type="text" class="form-control" name="appName" formControlName="appName">
+
+          <div [hidden]="myForm.controls['appName'].valid || myForm.controls['appName'].pristine" class="alert alert-danger"> Application Name is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="firstAndLastName">First & Last Name</label>
+          <input id="firstAndLastName" type="text" class="form-control" name="firstAndLastName" formControlName="firstAndLastName">
+          <div [hidden]="myForm.controls['firstAndLastName'].valid || myForm.controls['firstAndLastName'].pristine" class="alert alert-danger">
+            First & Last Name is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="appId">App ID</label>
+          <input id="appId" type="text" class="form-control" name="appId" formControlName="appId">
+          <div [hidden]="myForm.controls['appId'].valid || myForm.controls['appId'].pristine" class="alert alert-danger"> App ID is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="text" class="form-control" name="email" formControlName="email">
+
+          <div [hidden]="myForm.controls['email'].valid || myForm.controls['email'].pristine">
+            <p *ngIf="myForm.controls['email'].hasError('required')" class="alert alert-danger">Email is required.</p>
+            <p *ngIf="myForm.controls['email'].hasError('incorrectMailFormat')" class="alert alert-danger">Email is invalid.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="pcm">PCM</label>
+          <input id="pcm" type="text" class="form-control" name="pcm" formControlName="pcm">
+
+          <div [hidden]="myForm.controls['pcm'].valid || myForm.controls['pcm'].pristine" class="alert alert-danger"> PCM is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" type="text" class="form-control" name="title" formControlName="title">
+          <div [hidden]="myForm.controls['title'].valid || myForm.controls['title'].pristine" class="alert alert-danger">
+            Title is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="vp">VP</label>
+          <input id="vp" type="text" class="form-control" name="vp" formControlName="vp">
+          <div [hidden]="myForm.controls['vp'].valid || myForm.controls['vp'].pristine" class="alert alert-danger"> VP is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="deployementDate">Deployement Date</label>
+          <!--<input id="deployementDate" type="text" class="form-control" name="deployementDate" formControlName="deployementDate" >-->
+           <!--<div [hidden]="myForm.controls['deployementDate'].valid || myForm.controls['deployementDate'].pristine" class="alert alert-danger"> deployementDate is required.</div>-->
+          <div class = "datepicker">
+            <my-date-picker name="deployementDate" [options]="myDatePickerOptions" formControlName="deployementDate" (inputFieldChanged)="onInputFieldChanged($event)"
+              (onDateChanged)="onDateChanged($event)"></my-date-picker>
+          </div>
+          <div [hidden]="myForm.controls['deployementDate'].valid || myForm.controls['deployementDate'].pristine">
+            <!--<p> hasError</p>-->
+            <!--<p *ngIf="myForm.controls['deployementDate'].hasError('required')" class="alert alert-danger">Deployement Date is required.</p>-->
+            <p *ngIf="!require" class="alert alert-danger">Deployement Date is required.</p>
+            <p *ngIf="require && myForm.controls['deployementDate'].hasError('incorrectDateFormat')" class="alert alert-danger">Deployement Date is invalid.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-2 col-lg-2 col-xs-2">        
+      </div>
+      <div class="col-md-3 col-lg-3 col-xs-3">
+        <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Info About The App</button>
+      </div>
+      <div class="col-md-3 col-lg-3 col-xs-3">
+        <button type="submit" [disabled]=!myForm.valid class="btn btn-primary">Decision Matrix</button>
+      </div>
+       <div class="col-md-4 col-lg-4 col-xs-4">      
+         <button type="submit" [disabled]=!myForm.valid class="btn btn-primary">Hosting Calculator</button>  
+       </div>
+    </div>
+
+  </form>
+
+  <!--<div style="display: block;"> <button class="btn btn-primary">Back</button></div>-->
+
+</div>
